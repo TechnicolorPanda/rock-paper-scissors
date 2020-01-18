@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Rock Paper Scissors</title>
+    <meta charset="UTF-8" />
+</head>
+
+<body>
+    <script>
+
+        let playerScore = 0;
+        let computerScore = 0;
+        let tie = 0;
+
+        playGame();
+
+        function playerPlay() {
+            var playerAnswer = prompt("Pick Rock, Paper, or Scissors");
+            var playerAnswerLower = playerAnswer.toLowerCase();
+            return playerAnswerLower;
+        }
+
+        function computerPlay() {
+            var computerChoice = [Math.floor(Math.random() * 3)];
+            if (computerChoice == 0) {
+                var computerAnswer = "rock";
+            } else if (computerChoice == 1) {
+                var computerAnswer = "paper";
+            } else if (computerChoice == 2) {
+                var computerAnswer = "scissors";
+            } else {
+                var computerAnswer = "something went wrong";
+            }
+            return computerAnswer;
+        }
+
+        function playRound(player, computer) {
+            if (computer == "rock" && player == "rock") {
+                alert("It's a tie. Two rocks.");
+                return tie++;
+            } else if (computer == "rock" && player == "paper") {
+                alert("Paper covers rock. You win!");
+                return playerScore++;
+            } else if (computer == "rock" && player == "scissors") {
+                alert("Rock breaks scissors. You lose.");
+                return computerScore++;
+            } else if (computer == "paper" && player == "rock") {
+                alert("Paper covers rock. You lose.");
+                return computerScore++;
+            } else if (computer == "paper" && player == "paper") {
+                alert("Two papers. You tie.");
+                return tie ++;
+            } else if (computer == "paper" && player == "scissors") {
+                alert("Scissors cut paper. You win!");
+                return playerScore++;
+            } else if (computer == "scissors" && player == "rock") {
+                alert("Rock breaks scissors. You win!");
+                return playerScore++;
+            } else if (computer == "scissors" && player == "paper") {
+                alert("Scissors cut paper. You lose.");
+                return computerScore++;
+            } else if (computer == "scissors" && player == "scissors") {
+                alert("Two scissors. You tie.");
+                return tie++;
+            } else {
+                alert("You need to type rock, paper, or scissors. Try again.");
+            }
+        }
+
+        function playGame() {
+            let playerSelection = playerPlay();
+            let computerSelection = computerPlay();
+            playRound(playerSelection, computerSelection);
+            
+            playerSelection = playerPlay();
+            computerSelection = computerPlay();
+            playRound(playerSelection, computerSelection);
+            
+            playerSelection = playerPlay();
+            computerSelection = computerPlay();
+            playRound(playerSelection, computerSelection);
+            
+            playerSelection = playerPlay();
+            computerSelection = computerPlay();
+            playRound(playerSelection, computerSelection);
+            
+            playerSelection = playerPlay();
+            computerSelection = computerPlay();
+            playRound(playerSelection, computerSelection);
+        }
+
+
+        alert ("Computer wins: " + computerScore + " Player wins: " + playerScore + " Ties: " + tie);
+
+        
+    </script>
+</body>
+
+</html>
