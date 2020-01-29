@@ -1,100 +1,58 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Rock Paper Scissors</title>
     <meta charset="UTF-8" />
 </head>
 
+<link rel="stylesheet" 
+href="style.css">
+
 <body>
-    <script>
 
-        let playerScore = 0;
-        let computerScore = 0;
-        let tie = 0;
+    <div class="header">
+        <h1>
+        Rock, Paper, Scissors
+        </h1>
+    </div>
 
-        playGame();
+    <div class="row">
+        <div class="side">
+                <h2> Computer </h2>
+                <span class="dot" id = "compScore"></span>
+                <h2> Player </h2>
+                <span class="dot" id = "playerScore"></span>
+                <h2> Ties </h2>
+                <span class="dot" id = "tieScore"></span>
+        </div>
+    
+        <div class="main">
 
-        function playerPlay() {
-            var playerAnswer = prompt("Pick Rock, Paper, or Scissors");
-            var playerAnswerLower = playerAnswer.toLowerCase();
-            return playerAnswerLower;
-        }
+            <div id = "container">
+            </div>
 
-        function computerPlay() {
-            var computerChoice = [Math.floor(Math.random() * 3)];
-            if (computerChoice == 0) {
-                var computerAnswer = "rock";
-            } else if (computerChoice == 1) {
-                var computerAnswer = "paper";
-            } else if (computerChoice == 2) {
-                var computerAnswer = "scissors";
-            } else {
-                var computerAnswer = "something went wrong";
-            }
-            return computerAnswer;
-        }
-
-        function playRound(player, computer) {
-            if (computer == "rock" && player == "rock") {
-                alert("It's a tie. Two rocks.");
-                return tie++;
-            } else if (computer == "rock" && player == "paper") {
-                alert("Paper covers rock. You win!");
-                return playerScore++;
-            } else if (computer == "rock" && player == "scissors") {
-                alert("Rock breaks scissors. You lose.");
-                return computerScore++;
-            } else if (computer == "paper" && player == "rock") {
-                alert("Paper covers rock. You lose.");
-                return computerScore++;
-            } else if (computer == "paper" && player == "paper") {
-                alert("Two papers. You tie.");
-                return tie ++;
-            } else if (computer == "paper" && player == "scissors") {
-                alert("Scissors cut paper. You win!");
-                return playerScore++;
-            } else if (computer == "scissors" && player == "rock") {
-                alert("Rock breaks scissors. You win!");
-                return playerScore++;
-            } else if (computer == "scissors" && player == "paper") {
-                alert("Scissors cut paper. You lose.");
-                return computerScore++;
-            } else if (computer == "scissors" && player == "scissors") {
-                alert("Two scissors. You tie.");
-                return tie++;
-            } else {
-                alert("You need to type rock, paper, or scissors. Try again.");
-            }
-        }
-
-        function playGame() {
-            let playerSelection = playerPlay();
-            let computerSelection = computerPlay();
-            playRound(playerSelection, computerSelection);
+            <div id = gameBtn>
             
-            playerSelection = playerPlay();
-            computerSelection = computerPlay();
-            playRound(playerSelection, computerSelection);
-            
-            playerSelection = playerPlay();
-            computerSelection = computerPlay();
-            playRound(playerSelection, computerSelection);
-            
-            playerSelection = playerPlay();
-            computerSelection = computerPlay();
-            playRound(playerSelection, computerSelection);
-            
-            playerSelection = playerPlay();
-            computerSelection = computerPlay();
-            playRound(playerSelection, computerSelection);
-        }
+                    <button class = inputBtn id = "rock">
+                    <img src="rockimage.jpeg"
+                    width="150" length="150" alt="rock" class="center">
+                    </button>
+
+                    <button class = inputBtn id = "paper">
+                    <img src="paperimage.jpeg"
+                    width="150" length="150" alt="paper" class="center">
+                    </button>
+
+                    <button class = inputBtn id = "scissors">
+                    <img src="scissorsimage.png"
+                    width="150" length="150" alt="scissors" class="center">
+                    </button>
+
+            </div>
+        </div>
+    </div>
 
 
-        alert ("Computer wins: " + computerScore + " Player wins: " + playerScore + " Ties: " + tie);
-
-        
-    </script>
 </body>
-
+<script type="text/javascript" src="rps.js"></script>
 </html>
