@@ -1,19 +1,24 @@
 /* eslint-disable no-plusplus */
-const playRounds = prompt('How many rounds would you like to play?');
+
+// TODO: eliminate global variables
+
 let playerScore = 0;
 let computerScore = 0;
 let tie = 0;
 
+// computer makes random selection
+
 function computerPlay() {
-  let computerChoice = [Math.floor(Math.random() * 3)];
+  const computerChoice = [Math.floor(Math.random() * 3)];
   if (computerChoice == 0) {
     return 'rock';
-  } else if (computerChoice == 1) {
+  } if (computerChoice == 1) {
     return 'paper';
-  } else {
-    return 'scissors';
   }
+  return 'scissors';
 }
+
+// check computer selection against player selection to determine the winner
 
 function playRound(player, computer) {
   const content = document.getElementById('content');
@@ -48,6 +53,8 @@ function playRound(player, computer) {
   content.textContent = 'You need to type rock, paper, or scissors. Try again.';
 }
 
+// display grand champion once all rounds have been played
+
 function whoWins() {
   const content = document.getElementById('content');
   if (computerScore > playerScore) {
@@ -59,7 +66,9 @@ function whoWins() {
   }
 }
 
-function selectRock() {
+// TODO: check playRounds to see when all rounds have been completed to end the game
+
+function selectRock(playRounds) {
   playRound('rock', computerPlay());
   document.getElementById('compScore').innerHTML = computerScore;
   document.getElementById('playerScore').innerHTML = playerScore;
@@ -71,7 +80,7 @@ function selectRock() {
   }
 }
 
-function selectPaper() {
+function selectPaper(playRounds) {
   playRound('paper', computerPlay());
   document.getElementById('compScore').innerHTML = computerScore;
   document.getElementById('playerScore').innerHTML = playerScore;
@@ -83,7 +92,7 @@ function selectPaper() {
   }
 }
 
-function selectScissors() {
+function selectScissors(playRounds) {
   playRound('scissors', computerPlay());
   document.getElementById('compScore').innerHTML = computerScore;
   document.getElementById('playerScore').innerHTML = playerScore;
@@ -95,23 +104,59 @@ function selectScissors() {
   }
 }
 
-function playGame() {
+// submit player choice when selected
+
+function playGame(playRounds) {
   const rock = document.getElementById('rock');
-  rock.addEventListener('click', selectRock);
+  rock.addEventListener('click', () => {
+    selectRock(playRounds);
+  });
 
   const paper = document.getElementById('paper');
-  paper.addEventListener('click', selectPaper);
+  paper.addEventListener('click', () => {
+    selectPaper(playRounds);
+  });
 
   const scissors = document.getElementById('scissors');
-  scissors.addEventListener('click', selectScissors);
+  scissors.addEventListener('click', () => {
+    selectScissors(playRounds);
+  });
 }
 
+// provide instructions to player
+
+function beginGame() {
+  const playRounds = document.getElementById('numberOfRounds').value;
+  const content = document.getElementById('content');
+  content.textContent = 'Select rock, paper, or scissors.';
+  playGame(playRounds);
+}
+
+// create starting prompts
+
 function selectRounds() {
+  // prompt user to enter number of rounds
+
   const content = document.getElementById('content');
   content.classList.add('box');
-  content.textContent = 'Select rock, paper, or scissors.';
+  content.textContent = 'How many rounds would you like to play?';
 
-  playGame();
+  // create input box form
+
+  const enterNumber = document.createElement('input');
+  enterNumber.setAttribute('type', 'number');
+  enterNumber.setAttribute('value', '3');
+  enterNumber.setAttribute('id', 'numberOfRounds');
+  content.appendChild(enterNumber);
+
+  // create clickable submit button
+
+  const submitButton = document.createElement('button');
+  submitButton.setAttribute('type', 'button');
+  submitButton.setAttribute('id', 'submit');
+  submitButton.innerHTML = 'Submit';
+  content.appendChild(submitButton);
+  submitButton.addEventListener('click', beginGame);
 }
 
 selectRounds();

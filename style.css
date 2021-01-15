@@ -149,6 +149,19 @@ button {
     display: inline-block;
 }
 
+#submit {
+  background-image: none;
+  background-color: grey;
+  color: black;
+  border-radius: 6px;
+  padding: 4px;
+  height: 40px;
+}
+
+input {
+  padding: 4px;
+  margin: 6px;
+}
 
 
 
