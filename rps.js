@@ -1,7 +1,5 @@
 /* eslint-disable no-plusplus */
 
-// TODO: eliminate global variables
-
 // computer makes random selection
 
 function computerPlay() {
@@ -14,20 +12,16 @@ function computerPlay() {
   return 'scissors';
 }
 
-function recordScore(playerScore, computerScore, tie) {
+function recordScore(playRounds, playerScore, computerScore, tie) {
   document.getElementById('compScore').innerHTML = computerScore;
   document.getElementById('playerScore').innerHTML = playerScore;
   document.getElementById('tieScore').innerHTML = tie;
-  // if (playerScore + computerScore + tie === playRounds) {
-  //   whoWins(playerScore, computerScore, tie);
-  // } else {
-  //   console.log(playerScore);
-  // }
+  playGame(playRounds, playerScore, computerScore, tie);
 }
 
 // check computer selection against player selection to determine the winner
 
-function playRound(player, computer, playerScore, computerScore, tie) {
+function playRound(player, computer, playRounds, playerScore, computerScore, tie) {
   const content = document.getElementById('content');
   if (computer === 'rock' && player === 'rock') {
     content.textContent = "It's a tie. Two rocks.";
@@ -57,11 +51,11 @@ function playRound(player, computer, playerScore, computerScore, tie) {
     content.textContent = 'Two scissors. You tie.';
     tie++;
   }
-  console.log(playerScore, computerScore, tie);
-  recordScore(playerScore, computerScore, tie);
+  recordScore(playRounds, playerScore, computerScore, tie);
 }
 
 // display grand champion once all rounds have been played
+// TODO: enable counting of rounds to display winner
 
 function whoWins(playerScore, computerScore, tie) {
   const content = document.getElementById('content');
@@ -74,52 +68,22 @@ function whoWins(playerScore, computerScore, tie) {
   }
 }
 
-// TODO: check playRounds to see when all rounds have been completed to end the game
-
-function selectRock(playRounds, playerScore, computerScore, tie) {
-  playRound('rock', computerPlay(), playerScore, computerScore, tie);
-}
-
-function selectPaper(playRounds, playerScore, computerScore, tie) {
-  playRound('paper', computerPlay(), playerScore, computerScore, tie);
-  document.getElementById('compScore').innerHTML = computerScore;
-  document.getElementById('playerScore').innerHTML = playerScore;
-  document.getElementById('tieScore').innerHTML = tie;
-  if (playerScore + computerScore + tie === playRounds) {
-    whoWins(playerScore, computerScore, tie);
-  } else {
-    console.log(playerScore);
-  }
-}
-
-function selectScissors(playRounds, playerScore, computerScore, tie) {
-  playRound('scissors', computerPlay(), playerScore, computerScore, tie);
-  document.getElementById('compScore').innerHTML = computerScore;
-  document.getElementById('playerScore').innerHTML = playerScore;
-  document.getElementById('tieScore').innerHTML = tie;
-  if (playerScore + computerScore + tie === playRounds) {
-    whoWins(playerScore, computerScore, tie);
-  } else {
-    console.log(playerScore);
-  }
-}
-
 // submit player choice when selected
 
 function playGame(playRounds, playerScore, computerScore, tie) {
   const rock = document.getElementById('rock');
   rock.addEventListener('click', () => {
-    selectRock(playRounds, playerScore, computerScore, tie);
+    playRound('rock', computerPlay(), playRounds, playerScore, computerScore, tie);
   });
 
   const paper = document.getElementById('paper');
   paper.addEventListener('click', () => {
-    selectPaper(playRounds, playerScore, computerScore, tie);
+    playRound('paper', computerPlay(), playRounds, playerScore, computerScore, tie);
   });
 
   const scissors = document.getElementById('scissors');
   scissors.addEventListener('click', () => {
-    selectScissors(playRounds, playerScore, computerScore, tie);
+    playRound('scissors', computerPlay(), playRounds, playerScore, computerScore, tie);
   });
 }
 
