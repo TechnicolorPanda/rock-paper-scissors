@@ -12,13 +12,6 @@ function computerPlay() {
   return 'scissors';
 }
 
-function recordScore(playRounds, playerScore, computerScore, tie) {
-  document.getElementById('compScore').innerHTML = computerScore;
-  document.getElementById('playerScore').innerHTML = playerScore;
-  document.getElementById('tieScore').innerHTML = tie;
-  playGame(playRounds, playerScore, computerScore, tie);
-}
-
 // check computer selection against player selection to determine the winner
 
 function playRound(player, computer, playRounds, playerScore, computerScore, tie) {
@@ -57,7 +50,7 @@ function playRound(player, computer, playRounds, playerScore, computerScore, tie
 // display grand champion once all rounds have been played
 // TODO: enable counting of rounds to display winner
 
-function whoWins(playerScore, computerScore, tie) {
+function whoWins(playerScore, computerScore) {
   const content = document.getElementById('content');
   if (computerScore > playerScore) {
     content.textContent = `COMPUTER WINS! ${computerScore} to ${playerScore}`;
@@ -85,6 +78,24 @@ function playGame(playRounds, playerScore, computerScore, tie) {
   scissors.addEventListener('click', () => {
     playRound('scissors', computerPlay(), playRounds, playerScore, computerScore, tie);
   });
+}
+
+function checkWin(playRounds, playerScore, computerScore, tie) {
+  const roundsPlayed = (computerScore + playerScore + tie).toString();
+  if (playRounds !== roundsPlayed) {
+    playGame(playRounds, playerScore, computerScore, tie);
+  } else {
+    whoWins(playerScore, computerScore, tie);
+  }
+}
+
+// records score in circles at the end of each game
+
+function recordScore(playRounds, playerScore, computerScore, tie) {
+  document.getElementById('compScore').innerHTML = computerScore;
+  document.getElementById('playerScore').innerHTML = playerScore;
+  document.getElementById('tieScore').innerHTML = tie;
+  checkWin(playRounds, playerScore, computerScore, tie);
 }
 
 // provide instructions to player
