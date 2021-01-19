@@ -149,7 +149,7 @@ button {
     display: inline-block;
 }
 
-#submit {
+#submit, #play {
   background-image: none;
   background-color: grey;
   color: black;

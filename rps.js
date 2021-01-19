@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-plusplus */
 
 // computer makes random selection
@@ -10,6 +11,15 @@ function computerPlay() {
     return 'paper';
   }
   return 'scissors';
+}
+
+// records score in circles at the end of each game
+
+function recordScore(playRounds, playerScore, computerScore, tie) {
+  document.getElementById('compScore').innerHTML = computerScore;
+  document.getElementById('playerScore').innerHTML = playerScore;
+  document.getElementById('tieScore').innerHTML = tie;
+  checkWin(playRounds, playerScore, computerScore, tie);
 }
 
 // check computer selection against player selection to determine the winner
@@ -48,7 +58,6 @@ function playRound(player, computer, playRounds, playerScore, computerScore, tie
 }
 
 // display grand champion once all rounds have been played
-// TODO: enable counting of rounds to display winner
 
 function whoWins(playerScore, computerScore) {
   const content = document.getElementById('content');
@@ -59,6 +68,14 @@ function whoWins(playerScore, computerScore) {
   } else {
     content.textContent = 'TIE GAME!';
   }
+  const playAgain = document.createElement('button');
+  playAgain.setAttribute('id', 'play');
+  playAgain.innerHTML = 'Play Again';
+  content.appendChild(playAgain);
+
+  playAgain.addEventListener('click', () => {
+    selectRounds();
+  });
 }
 
 // submit player choice when selected
@@ -85,17 +102,8 @@ function checkWin(playRounds, playerScore, computerScore, tie) {
   if (playRounds !== roundsPlayed) {
     playGame(playRounds, playerScore, computerScore, tie);
   } else {
-    whoWins(playerScore, computerScore, tie);
+    whoWins(playerScore, computerScore);
   }
-}
-
-// records score in circles at the end of each game
-
-function recordScore(playRounds, playerScore, computerScore, tie) {
-  document.getElementById('compScore').innerHTML = computerScore;
-  document.getElementById('playerScore').innerHTML = playerScore;
-  document.getElementById('tieScore').innerHTML = tie;
-  checkWin(playRounds, playerScore, computerScore, tie);
 }
 
 // provide instructions to player
